@@ -50,6 +50,8 @@ if (!blogs.length) {
     localStorage.setItem('blogs', JSON.stringify(blogs));
 }
 
+
+
 document.addEventListener("DOMContentLoaded", () => {
     const main = document.getElementById('main');
 

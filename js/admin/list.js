@@ -56,7 +56,7 @@ function generateTable (blogs) {
     blogs.forEach((blog) => {
         const content =
             `
-                <tr>
+                <tr class="add-form">
                     <td>${blog.id}</td>
                     <td>${blog.title}</td>
                     <td>${blog.content}</td>
@@ -96,4 +96,21 @@ document.addEventListener("DOMContentLoaded", () => {
     generateTable(blogs);
     addEventForDeleteBtn();
 });
+
+
+function addEventEditBtn() {
+    document.querySelectorAll('.btn-edit').forEach((editButton) => {
+        editButton.addEventListener('click', function () {
+            const blogID = this.getAttribute('data-id');
+            editBlog(blogID);
+        });
+    });
+}
+
+function editBlog(blogId) {
+    const blogString = localStorage.getItem('blogs') || '[]';
+    let blogs = JSON.parse(blogString);
+    const blogToEdit = blogs.find(blog => blog.id === blogId);
+
+}
 

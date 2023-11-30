@@ -3,15 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Form</title>
+    <link rel="stylesheet" href="../style/admin/form.css">
 </head>
 <body>
-    This is form
-    <form>
-        <label>Title</label>
-        <input type="text" />
-
-        <button type="button">Save</button>
+    <form id="add-form">
+        <h2>Điền nội dung bài viết</h2>
+        <!--Hide field Id-->
+<!--        <div>-->
+<!--            <label>ID</label>-->
+<!--            <input type="text" id="id" value="">-->
+<!--        </div>-->
+        <div>
+           <label>Title</label>
+           <input type="text" id="title" value=""/>
+       </div>
+        <!--Bỏ subtitle-->
+<!--       <div>-->
+<!--           <label>Subtitle</label>-->
+<!--           <input type="text" id="subtitle" value=""/>-->
+<!--       </div>-->
+        <!-- Dùng text area -->
+        <div>
+            <label>Content</label>
+<!--            <input type="text" id="content" value=""/> <img src="" alt="img">-->
+            <textarea id="content" name="content" rows="4" cols="50"></textarea>
+        </div>
+        <div>
+            <label>Image Link</label>
+            <input type="text" name="image" id="image" value=""/>
+        </div>
+       <a href="list.html"> <button type="button" onclick="onSave()">Save</button> </a>
     </form>
-
+    <script src="../js/admin/form.js"></script>
 </body>
 </html>
