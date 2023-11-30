@@ -1,3 +1,46 @@
+form {
+    margin: 0 auto;
+    width: 500px;
+    color: #565656;
+}
 
+label {
+    display: block;
+    margin-bottom: 8px;
+    margin-top: 24px;
+    font-size: 16px;
+    font-weight: 500;
+}
 
+input, textarea {
+    width: 100%;
+}
+
+input {
+    height: 40px;
+    font-size: 16px;
+    padding: 8px;
+    border: 1px solid #001F24;
+    border-radius: 8px;
+}
+
+textarea {
+    border: 1px solid #001F24;
+    border-radius: 8px;
+}
+
+input::placeholder {
+    font-size: 16px;
+}
+
+button {
+    margin-top: 24px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    font-size: 16px;
+    border-radius: 8px;
+}
 

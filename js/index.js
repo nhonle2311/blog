@@ -2,17 +2,15 @@ import { faker } from 'https://cdn.skypack.dev/@faker-js/faker';
 
 function capitalizeFirstLetter(sentence) {
     // Tách câu thành các từ riêng lẻ
-    var words = sentence.split(' ');
+    const words = sentence.split(' ');
 
     // Chuyển đổi chữ cái đầu của mỗi từ thành chữ hoa
-    var capitalizedWords = words.map(function(word) {
+    const capitalizedWords = words.map(function(word) {
         return word.charAt(0).toUpperCase() + word.slice(1);
     });
 
     // Kết hợp các từ để tạo câu mới
-    var capitalizedSentence = capitalizedWords.join(' ');
-
-    return capitalizedSentence;
+    return capitalizedWords.join(' ');
 }
 
 function generateBlogPost() {
@@ -21,6 +19,7 @@ function generateBlogPost() {
     const content = faker.lorem.paragraphs(); // HTML content
     const title = capitalizeFirstLetter(faker.lorem.words({ min: 7, max: 10 }));
     const subTitle = `${content.substring(0, 100)}...`;
+    // TODO generate created date
 
     return {
         id,
@@ -51,14 +50,13 @@ if (!blogs.length) {
 }
 
 
-
 document.addEventListener("DOMContentLoaded", () => {
     const main = document.getElementById('main');
 
     blogs.forEach((blog) => {
         const content =
             `
-                <a class="article" href="article/1.html">
+                <a class="article" href="article/blog.html?blogId=${blog.id}">
                     <div class="image-container">
                         <img src="${blog.image}" alt="img">
                     </div>
