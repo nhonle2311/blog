@@ -1,3 +1,94 @@
-/*
-    TODO: add style for blog
-*/
+body {
+    padding: 0;
+    margin: 0;
+    font-family: "Fira Code", sans-serif;
+    overflow: hidden;
+    background-color: lightgrey;
+    color: #001F24;
+}
+
+.container {
+    margin: 0 0 0 200px;
+    display: flex;
+}
+
+
+.container .left {
+    width: 25%;
+    padding: 2rem;
+}
+
+.container .left .avatar {
+    width: 100%;
+    display: flex;
+}
+
+.container .left .avatar img {
+    border-radius: 50%;
+    width: 180px;
+    height: 180px;
+    border: 1px solid #a9a9a9;
+}
+
+.container .left .name {
+    text-align: left;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.container .left .description {
+    color: #565656;
+}
+
+.container .left .menu {
+    margin-top: 20px;
+}
+
+.container .left .menu ul {
+    margin: 0;
+    padding: 0;
+}
+
+.container .left .menu ul li {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    height: 50px;
+}
+
+.container .left .menu ul li:hover {
+    cursor: pointer;
+    transform: scale(110%);
+}
+
+.container .left .menu ul li img {
+    width: 20px;
+    height: 20px;
+}
+
+.container .left .menu ul li span {
+    margin-left: 20px;
+    font-size: 24px;
+    color: #565656;
+}
+
+.container .left .bio {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 14px;
+}
+
+.container .left .bio img:hover {
+    cursor: pointer;
+    transform: scale(110%);
+}
+
+.container .left .bio img {
+    width: 30px;
+    height: 30px;
+}
+.container .main {
+
+}
+
