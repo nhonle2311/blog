@@ -1,7 +1,4 @@
-// TODO:
-// 1: get blogId from URL
-// 2: blogId => blog (localStorage blogs)
-// 3: blog => DOM loader => generate data html
+
 function getBlogs() {
     const blogString = localStorage.getItem('blogs') ?? '[]';
     return JSON.parse(blogString);
@@ -29,17 +26,69 @@ document.addEventListener("DOMContentLoaded", () => {
                             </h2>
                         </div>
                         <div class="image">
-                            ${blog.image};
+                        <img src="${blog.image};" alt="img">
                         </div>
                         <div class="content">
                             ${blog.content};
                         </div>
-    
+                        
+                       
+                         <div id="comment">
+                            <h1>comment</h1>
+                            <div id="list-comment"></div>
+                            <div id="comment-count"></div>
+                            <form id="form-comment">                                                                                 
+                                <label for="text-comment">Your Comment</label>
+                                <textarea id="text-comment" rows="4" cols="50"  placeholder="Your Comment"></textarea>
+                                <label for="anonymous">Anonymous</label>
+                                <input type="checkbox" id="anonymous" />
+                                <button type="submit">Send</button>
+                             </form>
+                         </div>    
                     </div>   
             `;
         main.innerHTML = `${content}`
 
     }else {
-        main.innerText='không có'
+        main.innerText="blog not found"
     }
     })
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const formComment = document.getElementById('form-comment');
+    const comment = document.getElementById('comment');
+    formComment.addEventListener("submit", (event) =>{
+        event.preventDefault();
+        const textComment = document.getElementById('text-comment').value;
+        const isAnonymous = document.getElementById('anonymous').checked;
+        addComment(textComment, isAnonymous);
+        formComment.reset();
+    })
+
+    let commentCount = 0;
+    const commentCountElement = document.getElementById('comment-count');
+
+    function addComment(text, anonymous) {
+        commentCount++;
+        const commentElement = document.createElement('div');
+        commentElement.classList.add('comment');
+        commentElement.innerHTML = `<p>${text}</p>`;
+
+        if (anonymous) {
+            commentElement.innerHTML += `<p class="anonymous">Anonymous</p>`;
+        }
+
+        comment.appendChild(commentElement);
+        if (commentCountElement) {
+            commentCountElement.textContent = `number of comments: ${commentCount}`;
+        }
+
+    }
+
+})
+
+
+
+
+

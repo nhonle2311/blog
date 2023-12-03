@@ -54,7 +54,7 @@ function deleteBlog(blogId) {
 }
 
 function editBlog(blogId) {
-    window.location.href = `/blog/admin/edit.html?blogId=${blogId}`;
+    window.location.href = `/admin/edit.html?blogId=${blogId}`;
 }
 
 function addEventEditBtn() {
