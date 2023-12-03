@@ -21,7 +21,7 @@ function editBlog() {
     const blog = getBlog();
 
     formElements.forEach((element) => {
-        const isSubmitElement = element.getAttribute('type') == 'submit';
+        const isSubmitElement = element.getAttribute('type') === 'submit';
         if (!isSubmitElement) {
             if (!element.value) {
                 isInvalid = true;
