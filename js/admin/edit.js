@@ -15,6 +15,7 @@ function getBlog() {
 
     return blogs.find((blog) =>  blog.id === blogId) || {};
 }
+console.log(getBlogs())
 function editBlog() {
     let isInvalid = false;
     const formElements = getFormElements();
