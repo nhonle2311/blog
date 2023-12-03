@@ -14,7 +14,7 @@ function capitalizeFirstLetter(sentence) {
 }
 
 function generateFakeBlogContent() {
-    var blogContent = '';
+    let blogContent = '';
 
     for (let i = 0; i < Math.floor(Math.random() * 10); i++) {
         const fakeParagraph = faker.lorem.paragraphs({ min: 5, max: 10 });

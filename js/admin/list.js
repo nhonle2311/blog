@@ -21,7 +21,7 @@ function generateTable (blogs) {
                     <td>${blog.title}</td>
                     <td>${blog.content}</td>
                     <td>
-                        <img src="${blog.image}" />
+                        <img src="${blog.image}"  alt="img"/>
                     </td>
                     <td class="actions">
                         <div class="btn-group">

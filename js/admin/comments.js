@@ -59,22 +59,9 @@ function deleteComment(blogId, comment) {
     blogs[blogIndex].comments = blogs[blogIndex].comments.filter((c) => c !== comment)
     generateTable(getComments());
     addEventForDeleteBtn();
-    // addEventEditBtn();
     localStorage.setItem('blogs', JSON.stringify(blogs));
 }
-//
-// function editBlog(blogId) {
-//     window.location.href = `/admin/edit.html?blogId=${blogId}`;
-// }
-//
-// function addEventEditBtn() {
-//     document.querySelectorAll('.btn-edit').forEach((editButton) => {
-//         editButton.addEventListener('click', function () {
-//             const blogID = this.getAttribute('data-id');
-//             editBlog(blogID);
-//         });
-//     });
-// }
+
 
 document.addEventListener("DOMContentLoaded", () => {
     generateTable(getComments());
