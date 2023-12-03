@@ -3,90 +3,94 @@ function getBlogs() {
     const blogString = localStorage.getItem('blogs') ?? '[]';
     return JSON.parse(blogString);
 }
-console.log(getBlogs())
 function getBlog() {
     const blogs = getBlogs();
     const urlParams = new URLSearchParams(window.location.search);
     const blogID = urlParams.get('blogId');
     return blogs.find((blog) => blog.id === blogID) || {};
 }
-console.log(getBlog())
 
-document.addEventListener("DOMContentLoaded", () => {
+function generateBlog(blog, callback) {
     const main = document.getElementById('main');
-    const blog = getBlog();
-
-    if (blog.id){
+    if (blog.id) {
         const content =
             `       
-                    <div class="group">
+                <div class="blog">
+                    <div class="blog-detail">
                         <div class="title">
                             <h2>
-                                ${blog.title};
+                                ${blog.title}
                             </h2>
                         </div>
                         <div class="image">
-                        <img src="${blog.image};" alt="img">
+                            <img src="${blog.image};" alt="img">
                         </div>
                         <div class="content">
-                            ${blog.content};
+                            ${blog.content}
                         </div>
-                        
-                       
-                         <div id="comment">
-                            <h1>comment</h1>
-                            <div id="list-comment"></div>
-                            <div id="comment-count"></div>
-                            <form id="form-comment">                                                                                 
-                                <label for="text-comment">Your Comment</label>
-                                <textarea id="text-comment" rows="4" cols="50"  placeholder="Your Comment"></textarea>
-                                <label for="anonymous">Anonymous</label>
-                                <input type="checkbox" id="anonymous" />
-                                <button type="submit">Send</button>
-                             </form>
-                         </div>    
-                    </div>   
+                    </div>
+                    <div id="comments" class="comments"></div>
+                    <div class="add-comment">
+                        <form id="comment-editor" action="javascript:void(0);">
+                            <label for="content">Add your comment:</label>
+                            <textarea id="comment" name="comment" rows="6" cols="50" ></textarea>
+                            <input type="submit" id="submit-btn" value="Add" />
+                        </form>
+                    </div>
+                </div>
             `;
-        main.innerHTML = `${content}`
+        main.innerHTML = `${content}`;
 
-    }else {
-        main.innerText="blog not found"
+        if (typeof callback == 'function') {
+            callback(blog.comments || []);
+        }
+        addEventForSubmitBtn();
+    } else {
+        main.innerText="blog not found";
     }
+}
+
+function generateComments(comments = []) {
+    const commentsElement = document.getElementById('comments');
+    commentsElement.innerHTML =
+        `<div class="comment-title">Comments:</div>`;
+
+    comments.forEach((comment) => {
+        commentsElement.innerHTML +=
+            `
+                <div class="comment-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png">
+                    <span>${comment}</span>
+                </div>
+            `;
     })
+}
+
+function addEventForSubmitBtn() {
+    document.getElementById('submit-btn').addEventListener('click', () => {
+        const blogs = getBlogs();
+        const urlParams = new URLSearchParams(window.location.search);
+        const blogID = urlParams.get('blogId');
+        const commentValue = document.getElementById('comment').value;
+
+        if (commentValue) {
+            const blogIndex = blogs.findIndex((blog) => blog.id === blogID);
+            blogs[blogIndex].comments.unshift(commentValue);
+            localStorage.setItem('blogs', JSON.stringify(blogs));
+            generateComments(blogs[blogIndex].comments);
+            document.getElementById('comment').value = '';
+        } else {
+            alert('Please input your comment before')
+        }
+    })
+}
 
 document.addEventListener("DOMContentLoaded", () => {
+    const blog = getBlog();
+    generateBlog(blog, generateComments);
+});
 
-    const formComment = document.getElementById('form-comment');
-    const comment = document.getElementById('comment');
-    formComment.addEventListener("submit", (event) =>{
-        event.preventDefault();
-        const textComment = document.getElementById('text-comment').value;
-        const isAnonymous = document.getElementById('anonymous').checked;
-        addComment(textComment, isAnonymous);
-        formComment.reset();
-    })
 
-    let commentCount = 0;
-    const commentCountElement = document.getElementById('comment-count');
-
-    function addComment(text, anonymous) {
-        commentCount++;
-        const commentElement = document.createElement('div');
-        commentElement.classList.add('comment');
-        commentElement.innerHTML = `<p>${text}</p>`;
-
-        if (anonymous) {
-            commentElement.innerHTML += `<p class="anonymous">Anonymous</p>`;
-        }
-
-        comment.appendChild(commentElement);
-        if (commentCountElement) {
-            commentCountElement.textContent = `number of comments: ${commentCount}`;
-        }
-
-    }
-
-})
 
 
 

@@ -13,12 +13,33 @@ function capitalizeFirstLetter(sentence) {
     return capitalizedWords.join(' ');
 }
 
+function generateFakeBlogContent() {
+    var blogContent = '';
+
+    for (let i = 0; i < Math.floor(Math.random() * 10); i++) {
+        const fakeParagraph = faker.lorem.paragraphs({ min: 5, max: 10 });
+        blogContent += `<p>${fakeParagraph}</p>`;
+        blogContent += `<p><img src="${faker.image.imageUrl()}" alt="Fake Image"></p>`;
+    }
+
+    return blogContent;
+}
+
 function generateBlogPost() {
     const id = faker.datatype.uuid();
     const image = faker.image.urlLoremFlickr();
-    const content = faker.lorem.paragraphs(); // HTML content
+    const content = generateFakeBlogContent(); // HTML content
     const title = capitalizeFirstLetter(faker.lorem.words({ min: 7, max: 10 }));
     const subTitle = `${content.substring(0, 100)}...`;
+    const comments = () => {
+        const fakeComments = [];
+
+        for (let i = 0; i < Math.floor(Math.random() * 10); i++) {
+            fakeComments.push(faker.lorem.sentences({ min: 1, max: 3 }));
+        }
+
+        return fakeComments;
+    }
     // TODO generate created date
 
     return {
@@ -27,6 +48,7 @@ function generateBlogPost() {
         content,
         title,
         subTitle,
+        comments: comments(),
     };
 }
 
